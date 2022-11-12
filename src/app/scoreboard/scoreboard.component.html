@@ -1,0 +1,30 @@
+<table *ngIf="match$ | async as match">
+  <tr>
+    <td>
+      <button [disabled]="matchOver$ | async" (click)="winPoint(0)">Player 0</button>
+      <span *ngIf="p0Serve$ | async">*</span>
+    </td>
+    <td *ngFor="let set of match.sets">{{set[0]}}</td>
+    <ng-container *ngIf="!(matchOver$ | async)">
+      <td>{{match.players[0].games}}</td>
+      <td *ngIf="!(isTiebreak$ | async); else p0Points">{{match.players[0].points | point:match.players[1].points}}</td>
+      <ng-template #p0Points>
+        <td>{{match.players[0].points}}</td>
+      </ng-template>
+    </ng-container>
+  </tr>
+  <tr>
+    <td>
+      <button [disabled]="matchOver$ | async" (click)="winPoint(1)">Player 1</button>
+      <span *ngIf="!(p0Serve$ | async)">*</span>
+    </td>
+    <td *ngFor="let set of match.sets">{{set[1]}}</td>
+    <ng-container *ngIf="!(matchOver$ | async)">
+      <td>{{match.players[1].games}}</td>
+      <td *ngIf="!(isTiebreak$ | async); else p1Points">{{match.players[1].points | point:match.players[0].points}}</td>
+      <ng-template #p1Points>
+        <td>{{match.players[1].points}}</td>
+      </ng-template>
+    </ng-container>
+  </tr>
+</table>
