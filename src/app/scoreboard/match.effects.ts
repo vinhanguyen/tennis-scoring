@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { concatMap, map, of, withLatestFrom } from "rxjs";
-import { point, doNothing, game, set, match, tiebreak } from "./match.actions";
+import { concatMap, map, of, tap, withLatestFrom } from "rxjs";
+import { point, doNothing, game, set, match, tiebreak, load, loadSuccess, reset } from "./match.actions";
 import { State } from "./match.reducer";
 
 @Injectable()
@@ -48,7 +48,9 @@ export class MatchEffects {
       map(([action, match]) => {
         const {games: [p1, p2]} = match;
 
-        if (p1 === 7) {
+        if (p1+p2 === 12) {
+          return tiebreak();
+        } else if (p1 === 7) {
           return set({winner: 1});
         } else if (p2 === 7) {
           return set({winner: 2});
@@ -56,8 +58,6 @@ export class MatchEffects {
           return set({winner: 1});
         } else if (p2 >= 6 && p2-p1 >= 2) {
           return set({winner: 2});
-        } else if (p1+p2 === 12) {
-          return tiebreak();
         }
         return doNothing();
       })
@@ -83,6 +83,42 @@ export class MatchEffects {
         return doNothing();
       })
     )
+  );
+
+  save$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(point, game, set, tiebreak),
+      concatMap(action => of(action).pipe(
+        withLatestFrom(
+          this.store.select(({match}) => match)
+        ),
+      )),
+      tap(([action, match]) => {
+        localStorage.setItem('match', JSON.stringify(match));
+      })
+    ), {dispatch: false}
+  );
+
+  loadMatch$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(load),
+      map(() => {
+        const match = localStorage.getItem('match');
+        if (match) {
+          return loadSuccess({match: JSON.parse(match)});
+        }
+        return doNothing();
+      })
+    )
+  );
+
+  reset$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(reset),
+      tap(() => {
+        localStorage.clear();
+      })
+    ), {dispatch: false}
   );
  
   constructor(

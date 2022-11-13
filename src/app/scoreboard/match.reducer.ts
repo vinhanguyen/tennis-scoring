@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { game, match, point, set, tiebreak } from "./match.actions";
+import { game, loadSuccess, match, point, reset, set, tiebreak } from "./match.actions";
 import * as _ from 'lodash';
 
 export interface State {
@@ -38,8 +38,9 @@ export const matchReducer = createReducer(
     }
 
     [p1, p2] = next.points;
+    const odd = (p1+p2)%2 === 1;
 
-    if (tiebreak && (p1+p2)%2 === 1) {
+    if (tiebreak && odd) {
       next.server = prev.server === 1 ? 2 : 1;
     }
     
@@ -71,10 +72,10 @@ export const matchReducer = createReducer(
     } else {
       next.sets = [p1, p2+1];
     }
-
-    next.games = [0,0];
     
     next.setResults.push(prev.games);
+
+    next.games = [0,0];
 
     if (tiebreak) {
       next.server = tiebreakServer === 1 ? 2 : 1;
@@ -104,4 +105,6 @@ export const matchReducer = createReducer(
     
     return next;
   }),
+  on(loadSuccess, (prev, {match}) => match),
+  on(reset, () => _.cloneDeep(initialState)),
 );
