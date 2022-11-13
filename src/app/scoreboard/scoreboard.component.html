@@ -21,10 +21,10 @@
   </tr>
 </table>
 
-<nav *ngIf="!(winner$ | async)" class="buttons">
-  <button (click)="winPoint(1)">Player 1</button>
+<nav>
+  <button class="p1" *ngIf="!(winner$ | async)" (click)="winPoint(1)">Player 1</button>
   <button (click)="clickReset()">Reset</button>
-  <button (click)="winPoint(2)">Player 2</button>
+  <button class="p2" *ngIf="!(winner$ | async)" (click)="winPoint(2)">Player 2</button>
 </nav>
 
 <!-- <div *ngIf="match$ | async as match">{{match | json}}</div> -->

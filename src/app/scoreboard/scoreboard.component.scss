@@ -27,11 +27,11 @@ nav {
     flex: 1;
   }
 
-  button:first-child {
-    background-color: tomato;
+  .p1 {
+    background-color: red;
   }
 
-  button:last-child {
-    background-color: cornflowerblue;
+  .p2 {
+    background-color: blue;
   }
 }
