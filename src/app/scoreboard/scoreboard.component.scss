@@ -22,9 +22,15 @@ table {
 
 nav {
   display: flex;
+  margin: 1em 0;
 
   button {
     flex: 1;
+    padding: 1em;
+  }
+
+  .p1, .p2 {
+    color: white;
   }
 
   .p1 {
