@@ -3,7 +3,7 @@
     <td class="p1">
       <span class="flag">&#9632;</span>
       Player 1
-      <span *ngIf="match.server === 1">&#9918;</span>
+      <span *ngIf="match.server === 1">&#9679;</span>
       <span *ngIf="match.winner === 1">&#11088;</span>
     </td>
     <td *ngFor="let set of match.setResults">{{set[0]}}</td>
@@ -14,7 +14,7 @@
     <td class="p2">
       <span class="flag">&#9632;</span>
       Player 2
-      <span *ngIf="match.server === 2">&#9918;</span>
+      <span *ngIf="match.server === 2">&#9679;</span>
       <span *ngIf="match.winner === 2">&#11088;</span>
     </td>
     <td *ngFor="let set of match.setResults">{{set[1]}}</td>
