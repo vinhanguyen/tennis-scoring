@@ -1,8 +1,10 @@
 table {
+  width: 100%;
   border-collapse: collapse;
 }
 
 td {
   border: solid 1px black;
   padding: 1em;
+  text-align: center;
 }
