@@ -5,6 +5,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  margin: 1em 0;
 
   td {
     padding: 1em;
@@ -22,7 +23,6 @@ table {
 
 nav {
   display: flex;
-  margin: 1em 0;
 
   button {
     flex: 1;
