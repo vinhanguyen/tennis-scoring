@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { load, point, reset, setMaxSets } from './match.actions';
 import { State } from './match.reducer';
 
