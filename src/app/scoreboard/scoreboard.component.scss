@@ -1,3 +1,7 @@
+* {
+  font-family: sans-serif;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -7,6 +11,10 @@ td {
   border: solid 1px black;
   padding: 1em;
   text-align: center;
+}
+
+td:first-child {
+  text-align: left;
 }
 
 .buttons {
