@@ -11,3 +11,5 @@ export const load = createAction('[Match] Load');
 export const loadSuccess = createAction('[Match] Load success', props<{match: State}>());
 export const reset = createAction('[Match] Reset');
 export const setMaxSets = createAction('[Match] Set max sets', props<{maxSets: number}>());
+export const coinToss = createAction('[Match] Coin toss');
+export const coinTossResult = createAction('[Match] Coin toss result', props<{result: number}>());

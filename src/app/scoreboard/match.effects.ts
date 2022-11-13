@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { concatMap, map, of, tap, withLatestFrom } from "rxjs";
-import { point, doNothing, game, set, match, tiebreak, load, loadSuccess, reset } from "./match.actions";
+import { point, doNothing, game, set, match, tiebreak, load, loadSuccess, reset, coinToss, coinTossResult, setMaxSets } from "./match.actions";
 import { State } from "./match.reducer";
 
 @Injectable()
@@ -134,6 +134,24 @@ export class MatchEffects {
         localStorage.clear();
       })
     ), {dispatch: false}
+  );
+
+  setMaxSets$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setMaxSets),
+      map(() => coinToss())
+    )
+  );
+
+  coinToss$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(coinToss),
+      map(() => {
+        const result = Math.floor(Math.random()*2);
+
+        return coinTossResult({result});
+      })
+    )
   );
  
   constructor(

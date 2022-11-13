@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { game, loadSuccess, match, point, reset, set, setMaxSets, tiebreak } from "./match.actions";
+import { coinTossResult, game, loadSuccess, match, point, reset, set, setMaxSets, tiebreak } from "./match.actions";
 import * as _ from 'lodash';
 
 export interface State {
@@ -19,7 +19,7 @@ export const initialState: State = {
   games: [0,0],
   sets: [0,0],
   setResults: [],
-  server: 1,
+  server: 0,
   winner: 0,
   tiebreak: false,
   tiebreakServer: 0,
@@ -113,6 +113,13 @@ export const matchReducer = createReducer(
     const next = _.cloneDeep(prev);
 
     next.maxSets = maxSets;
+    
+    return next;
+  }),
+  on(coinTossResult, (prev, {result}) => {
+    const next = _.cloneDeep(prev);
+
+    next.server = result === 0 ? 1 : 2;
     
     return next;
   }),
