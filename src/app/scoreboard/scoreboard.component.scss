@@ -23,6 +23,14 @@ table {
   td.points {
     font-weight: bold;
   }
+
+  td.p1 .flag {
+    color: red;
+  }
+
+  td.p2 .flag {
+    color: blue;
+  }
 }
 
 nav {
