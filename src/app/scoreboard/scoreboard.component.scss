@@ -5,16 +5,19 @@
 table {
   width: 100%;
   border-collapse: collapse;
-}
 
-td {
-  border: solid 1px black;
-  padding: 1em;
-  text-align: center;
-}
+  td {
+    padding: 1em;
+    text-align: center;
+  }
+  
+  td:first-child {
+    text-align: left;
+  }
 
-td:first-child {
-  text-align: left;
+  td:not(:first-child) {
+    border-left: solid 1px black;
+  }
 }
 
 nav {
