@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { load, point, reset } from './match.actions';
+import { load, point, reset, setMaxSets } from './match.actions';
 import { State } from './match.reducer';
 
 @Component({
@@ -11,15 +11,16 @@ import { State } from './match.reducer';
 })
 export class ScoreboardComponent implements OnInit {
   match$!: Observable<State>;
-  winner$!: Observable<boolean>;
+  maxSets$!: Observable<number>;
+  winner$!: Observable<number>;
 
   constructor(private store: Store<{match: State}>) { }
 
   ngOnInit(): void {
     this.match$ = this.store.select(({match}) => match);
-    this.winner$ = this.match$.pipe(
-      map(({winner}) => winner ? true : false)
-    );
+    this.maxSets$ = this.store.select(({match: {maxSets}}) => maxSets);
+    this.winner$ = this.store.select(({match: {winner}}) => winner);
+    
     this.store.dispatch(load());
   }
 
@@ -27,8 +28,15 @@ export class ScoreboardComponent implements OnInit {
     this.store.dispatch(point({winner}));
   }
 
-  clickReset() {
-    const ok = confirm('Are you sure you want to reset match?');
+  promptMaxSets() {
+    const maxSets = prompt('Play 1, 3, 5 set match?');
+    if (maxSets && maxSets.match(/1|3|5/)) {
+      this.store.dispatch(setMaxSets({maxSets: Number(maxSets)}));
+    }
+  }
+
+  confirmReset() {
+    const ok = confirm('Are you sure?');
     if (ok) {
       this.store.dispatch(reset());
     }

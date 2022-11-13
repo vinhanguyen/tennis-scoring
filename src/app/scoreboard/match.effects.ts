@@ -73,13 +73,28 @@ export class MatchEffects {
         ),
       )),
       map(([action, state]) => {
-        const {sets: [p1, p2]} = state;
+        const {sets: [p1, p2], maxSets} = state;
 
-        if (p1 === 2) {
-          return match({winner: 1});
-        } else if (p2 === 2) {
-          return match({winner: 2});
+        if (maxSets === 1) {
+          if (p1 === 1) {
+            return match({winner: 1});
+          } else if (p2 === 1) {
+            return match({winner: 2});
+          }
+        } else if (maxSets === 3) {
+          if (p1 === 2) {
+            return match({winner: 1});
+          } else if (p2 === 2) {
+            return match({winner: 2});
+          }
+        } else if (maxSets === 5) {
+          if (p1 === 3) {
+            return match({winner: 1});
+          } else if (p2 === 3) {
+            return match({winner: 2});
+          }
         }
+
         return doNothing();
       })
     )

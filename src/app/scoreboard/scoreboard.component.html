@@ -24,9 +24,12 @@
 </table>
 
 <nav>
-  <button class="p1" *ngIf="!(winner$ | async)" (click)="winPoint(1)">Player 1</button>
-  <button class="reset" (click)="clickReset()">Reset</button>
-  <button class="p2" *ngIf="!(winner$ | async)" (click)="winPoint(2)">Player 2</button>
+  <button *ngIf="!(maxSets$ | async); else play" (click)="promptMaxSets()">Start</button>
+  <ng-template #play>
+    <button class="p1" *ngIf="!(winner$ | async)" (click)="winPoint(1)">Player 1</button>
+    <button class="reset" (click)="confirmReset()">Reset</button>
+    <button class="p2" *ngIf="!(winner$ | async)" (click)="winPoint(2)">Player 2</button>
+  </ng-template>
 </nav>
 
 <!-- <div *ngIf="match$ | async as match">{{match | json}}</div> -->
