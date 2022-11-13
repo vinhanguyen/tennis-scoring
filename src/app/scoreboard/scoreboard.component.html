@@ -1,22 +1,21 @@
 <table *ngIf="match$ | async as match">
   <tr>
-    <td>
-      <button [disabled]="match.winner" (click)="winPoint(1)">Player 1</button>
-      <span *ngIf="match.server === 1">*</span>
-    </td>
+    <td>Player 1 <span *ngIf="match.server === 1">&#9918;</span></td>
     <td *ngIf="!match.winner">{{match.points[0] | point:match.points[1]:match.tiebreak}}</td>
     <td *ngFor="let set of match.setResults">{{set[0]}}</td>
     <td *ngIf="!match.winner">{{match.games[0]}}</td>
   </tr>
   <tr>
-    <td>
-      <button [disabled]="match.winner" (click)="winPoint(2)">Player 2</button>
-      <span *ngIf="match.server === 2">*</span>
-    </td>
+    <td>Player 2 <span *ngIf="match.server === 2">&#9918;</span></td>
     <td *ngIf="!match.winner">{{match.points[1] | point:match.points[0]:match.tiebreak}}</td>
     <td *ngFor="let set of match.setResults">{{set[1]}}</td>
     <td *ngIf="!match.winner">{{match.games[1]}}</td>
   </tr>
 </table>
 
-<div *ngIf="match$ | async as match">{{match | json}}</div>
+<div *ngIf="!(winner$ | async)" class="buttons">
+  <button (click)="winPoint(1)">Player 1</button>
+  <button (click)="winPoint(2)">Player 2</button>
+</div>
+
+<!-- <div *ngIf="match$ | async as match">{{match | json}}</div> -->

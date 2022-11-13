@@ -8,3 +8,19 @@ td {
   padding: 1em;
   text-align: center;
 }
+
+.buttons {
+  display: flex;
+
+  button {
+    flex: 1;
+  }
+
+  button:first-child {
+    background-color: tomato;
+  }
+
+  button:last-child {
+    background-color: cornflowerblue;
+  }
+}
