@@ -25,7 +25,7 @@
 
 <nav>
   <button class="p1" *ngIf="!(winner$ | async)" (click)="winPoint(1)">Player 1</button>
-  <button (click)="clickReset()">Reset</button>
+  <button class="reset" (click)="clickReset()">Reset</button>
   <button class="p2" *ngIf="!(winner$ | async)" (click)="winPoint(2)">Player 2</button>
 </nav>
 
