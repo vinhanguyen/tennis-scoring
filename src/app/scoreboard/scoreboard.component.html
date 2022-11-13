@@ -7,7 +7,7 @@
     </td>
     <td *ngFor="let set of match.setResults">{{set[0]}}</td>
     <td *ngIf="!match.winner">{{match.games[0]}}</td>
-    <td *ngIf="!match.winner">{{match.points[0] | point:match.points[1]:match.tiebreak}}</td>
+    <td class="points" *ngIf="!match.winner">{{match.points[0] | point:match.points[1]:match.tiebreak}}</td>
   </tr>
   <tr>
     <td>
@@ -17,7 +17,7 @@
     </td>
     <td *ngFor="let set of match.setResults">{{set[1]}}</td>
     <td *ngIf="!match.winner">{{match.games[1]}}</td>
-    <td *ngIf="!match.winner">{{match.points[1] | point:match.points[0]:match.tiebreak}}</td>
+    <td class="points" *ngIf="!match.winner">{{match.points[1] | point:match.points[0]:match.tiebreak}}</td>
   </tr>
 </table>
 

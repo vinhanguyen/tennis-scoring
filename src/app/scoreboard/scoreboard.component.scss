@@ -19,6 +19,10 @@ table {
   td:not(:first-child) {
     border-left: solid 1px black;
   }
+
+  td.points {
+    font-weight: bold;
+  }
 }
 
 nav {
