@@ -1,4 +1,4 @@
-<table *ngIf="match$ | async as match">
+<!-- <table *ngIf="match$ | async as match">
   <tr>
     <td>
       <button [disabled]="matchOver$ | async" (click)="winPoint(0)">Player 0</button>
@@ -27,4 +27,9 @@
       </ng-template>
     </ng-container>
   </tr>
-</table>
+</table> -->
+<div *ngIf="match$ | async as match">{{match | json}}</div>
+<div *ngIf="!(winner$ | async)">
+  <button (click)="winPoint(1)">Player 1</button>
+  <button (click)="winPoint(2)">Player 2</button>
+</div>

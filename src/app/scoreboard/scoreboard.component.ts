@@ -11,22 +11,14 @@ import { State } from './match.reducer';
 })
 export class ScoreboardComponent implements OnInit {
   match$!: Observable<State>;
-  matchOver$!: Observable<boolean>;
-  p0Serve$!: Observable<boolean>;
-  isTiebreak$!: Observable<boolean>;
+  winner$!: Observable<boolean>;
 
   constructor(private store: Store<{match: State}>) { }
 
   ngOnInit(): void {
     this.match$ = this.store.select(({match}) => match);
-    this.matchOver$ = this.match$.pipe(
-      map(({players: [{sets: p0Sets}, {sets: p1Sets}]}) => p0Sets === 2 || p1Sets === 2)
-    );
-    this.p0Serve$ = this.match$.pipe(
-      map(({p0Serve}) => p0Serve)
-    );
-    this.isTiebreak$ = this.match$.pipe(
-      map(({players: [{games: p0Games}, {games: p1Games}]}) => p0Games+p1Games === 12)
+    this.winner$ = this.match$.pipe(
+      map(({winner}) => winner ? true : false)
     );
   }
 
