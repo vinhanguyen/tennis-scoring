@@ -28,7 +28,10 @@ export class ScoreboardComponent implements OnInit {
   }
 
   clickReset() {
-    this.store.dispatch(reset());
+    const ok = confirm('Are you sure you want to reset match?');
+    if (ok) {
+      this.store.dispatch(reset());
+    }
   }
 
 }
