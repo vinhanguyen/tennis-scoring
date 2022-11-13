@@ -102,7 +102,7 @@ export class MatchEffects {
 
   save$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(point, game, set, tiebreak),
+      ofType(setMaxSets, coinTossResult, point, game, set, tiebreak),
       concatMap(action => of(action).pipe(
         withLatestFrom(
           this.store.select(({match}) => match)
