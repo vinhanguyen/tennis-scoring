@@ -15,8 +15,8 @@ import { matchReducer } from './scoreboard/match.reducer';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ match: matchReducer }),
-    EffectsModule.forRoot([MatchEffects])
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

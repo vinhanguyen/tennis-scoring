@@ -4,6 +4,7 @@ import { Store } from "@ngrx/store";
 import { concatMap, map, of, tap, withLatestFrom } from "rxjs";
 import { point, doNothing, game, set, match, tiebreak, load, loadSuccess, reset, coinToss, coinTossResult, setMaxSets } from "./match.actions";
 import { State } from "./match.reducer";
+import { selectMatch } from "./match.selectors";
 
 @Injectable()
 export class MatchEffects {
@@ -13,7 +14,7 @@ export class MatchEffects {
       ofType(point),
       concatMap(action => of(action).pipe(
         withLatestFrom(
-          this.store.select(({match}) => match)
+          this.store.select(selectMatch)
         ),
       )),
       map(([action, match]) => {
@@ -42,7 +43,7 @@ export class MatchEffects {
       ofType(game),
       concatMap(action => of(action).pipe(
         withLatestFrom(
-          this.store.select(({match}) => match)
+          this.store.select(selectMatch)
         ),
       )),
       map(([action, match]) => {
@@ -69,7 +70,7 @@ export class MatchEffects {
       ofType(set),
       concatMap(action => of(action).pipe(
         withLatestFrom(
-          this.store.select(({match: state}) => state)
+          this.store.select(selectMatch)
         ),
       )),
       map(([action, state]) => {
@@ -105,7 +106,7 @@ export class MatchEffects {
       ofType(setMaxSets, coinTossResult, point, game, set, tiebreak),
       concatMap(action => of(action).pipe(
         withLatestFrom(
-          this.store.select(({match}) => match)
+          this.store.select(selectMatch)
         ),
       )),
       tap(([action, match]) => {

@@ -2,6 +2,8 @@ import { createReducer, on } from "@ngrx/store";
 import { coinTossResult, game, loadSuccess, match, point, reset, set, setMaxSets, tiebreak } from "./match.actions";
 import * as _ from 'lodash';
 
+export const matchFeatureKey = 'match';
+
 export interface State {
   points: number[],
   games: number[],

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { load, point, reset, setMaxSets } from './match.actions';
 import { State } from './match.reducer';
+import { selectMatch, selectMaxSets, selectWinner } from './match.selectors';
 
 @Component({
   selector: 'app-scoreboard',
@@ -14,12 +15,12 @@ export class ScoreboardComponent implements OnInit {
   maxSets$!: Observable<number>;
   winner$!: Observable<number>;
 
-  constructor(private store: Store<{match: State}>) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.match$ = this.store.select(({match}) => match);
-    this.maxSets$ = this.store.select(({match: {maxSets}}) => maxSets);
-    this.winner$ = this.store.select(({match: {winner}}) => winner);
+    this.match$ = this.store.select(selectMatch);
+    this.maxSets$ = this.store.select(selectMaxSets);
+    this.winner$ = this.store.select(selectWinner);
     
     this.store.dispatch(load());
   }

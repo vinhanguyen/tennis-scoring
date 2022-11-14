@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { ScoreboardRoutingModule } from './scoreboard-routing.module';
 import { ScoreboardComponent } from './scoreboard.component';
 import { PointPipe } from './point.pipe';
+import { StoreModule } from '@ngrx/store';
+import { matchFeatureKey, matchReducer } from './match.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { MatchEffects } from './match.effects';
 
 
 @NgModule({
@@ -13,7 +17,9 @@ import { PointPipe } from './point.pipe';
   ],
   imports: [
     CommonModule,
-    ScoreboardRoutingModule
+    ScoreboardRoutingModule,
+    StoreModule.forFeature(matchFeatureKey, matchReducer),
+    EffectsModule.forFeature([MatchEffects])
   ]
 })
 export class ScoreboardModule { }
