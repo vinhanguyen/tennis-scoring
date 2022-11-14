@@ -49,7 +49,7 @@ export class MatchEffects {
       map(([action, match]) => {
         const {games: [p1, p2]} = match;
 
-        if (p1+p2 === 12) {
+        if (p1 === 6 && p2 === 6) {
           return tiebreak();
         } else if (p1 === 7) {
           return set({winner: 1});
